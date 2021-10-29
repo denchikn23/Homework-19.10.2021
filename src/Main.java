@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        boolean isGreenLight = true;
+        boolean isGreenLight = false;
 
         int speedOfPlayer1 = 5;
-        int speedOfPlayer2 = 0;
+        int speedOfPlayer2 = 1;
         int speedOfPlayer3 = 2;
 
         int countOfEliminatedPlayers = 0;
