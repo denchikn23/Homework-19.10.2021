@@ -1,26 +1,27 @@
 public class Main {
-    public static void main(String[] args) {
-        boolean isGreenLight = false;
+    public static boolean isGreenLight = true;
 
-        int speedOfPlayer1 = 5;
-        int speedOfPlayer2 = 1;
-        int speedOfPlayer3 = 2;
-
-        int countOfEliminatedPlayers = 0;
-
+    public static boolean isOut(int speed) {
         if (!isGreenLight) {
-            if (speedOfPlayer1 != 0) {
-                countOfEliminatedPlayers++;
+            if (speed != 0) {
+                return true;
             }
-            if (speedOfPlayer2 != 0) {
-                countOfEliminatedPlayers++;
+            else {
+                return false;
             }
-            if (speedOfPlayer3 != 0) {
-                countOfEliminatedPlayers++;
-            }
+        } else {
+            return false;
         }
+    }
 
-        System.out.println("Количество игроков, которые выбывают: " + countOfEliminatedPlayers + '.');
+    public static void main(String[] args) {
+        int speed = 1;
 
+        if (isOut(speed)){
+            System.out.println("Игрок со скоростью " + speed + " выбывает из игры.");
+        } else {
+            System.out.println("Игрок со скоростью " + speed + " остается в игре.");
+        }
     }
 }
+
