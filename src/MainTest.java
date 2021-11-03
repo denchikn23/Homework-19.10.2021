@@ -1,29 +1,31 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class MainTest {
 
-    @Test // Имеется ввиду, что отрицательная скорость - движение в противоположном направлении относительно выбранного.
-    public void shouldWorkIfIsNotGreenLightAndNegativeSpeed() {
-        int speed = -1;
-        boolean actual = Main.isOut(speed);
-
-        Assertions.assertTrue(actual);
-    }
-
-    @Test // Имеется ввиду, что отрицательная скорость - движение в противоположном направлении относительно выбранного.
-    public void shouldWorkIfIsGreenLightAndNegativeSpeed() {
-        int speed = -1;
-        boolean actual = Main.isOut(speed);
-
-        Assertions.assertFalse(actual);
+    @Test
+    public void shouldWorkIfThereAreNotPlayers() {
+        int[] speed = {};
+        int actual = Main.numberOfLosers(speed);
+        int expected = 0;
+        Assertions.assertEquals(actual, expected, "Система некорректно работает, если нет игроков.");
     }
 
     @Test
-    public void shouldWorkIfIsGreenLightAndSpeedIsZero() {
-        int speed = 0;
-        boolean actual = Main.isOut(speed);
+    public void shouldWorkWithNegativeSpeedIfIsNotGreenLight() {
+        int[] speed = {3, -1, 0};
+        int[] actual = Main.speedsOfLosers(speed);
+        int[] expected = {3, -1};
+        Assertions.assertArrayEquals(actual, expected, "Система неправильно считает скорости выбывших игроков с отрицательными скоростями или выводит скорости не в том порядке.");
+    }
 
-        Assertions.assertFalse(actual);
+    @Test
+    public void shouldWorkIfIsGreenLight() {
+        int[] speed = {3, -1, 0};
+        int[] actual = Main.speedsOfWinners(speed);
+        int[] expected = {3, -1, 0};
+        Assertions.assertArrayEquals(actual, expected, "Система некорректно работает с зеленым светом или выводит скорости не в том порядке.");
     }
 }
