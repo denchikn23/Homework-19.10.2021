@@ -1,27 +1,58 @@
-public class Main {
-    public static boolean isGreenLight = true;
+import java.util.Arrays;
 
-    public static boolean isOut(int speed) {
+public class Main {
+    public static boolean isGreenLight = false;
+
+    public static int numberOfLosers(int[] speed) {
+        int count = 0;
         if (!isGreenLight) {
-            if (speed != 0) {
-                return true;
+            for (int i = 0; i < speed.length; i++){
+                if (speed[i] != 0){
+                    count++;
+                }
             }
-            else {
-                return false;
+        }
+        return count;
+    }
+
+    public static int[] speedsOfLosers(int[] speed){
+        int count = numberOfLosers(speed);
+        int[] arrOfSpeeds = new int[count];
+        int countOfLosers = 0; // Всегда не больше, чем количество игроков
+        if (!isGreenLight) {
+            for (int i = 0; i < speed.length; i++){
+                if (speed[i] != 0){
+                    arrOfSpeeds[countOfLosers] = speed[i];
+                    countOfLosers++;
+                }
+            }
+        }
+        return arrOfSpeeds;
+    }
+
+    public static int[] speedsOfWinners(int[] speed){
+        int count = speed.length - numberOfLosers(speed);
+        int[] arrOfSpeeds = new int[count];
+        int countOfWinners = 0; // Всегда не больше, чем количество игроков
+        if (!isGreenLight) {
+            for (int i = 0; i < speed.length; i++){
+                if (speed[i] == 0){
+                    arrOfSpeeds[countOfWinners] = speed[i];
+                    countOfWinners++;
+                }
             }
         } else {
-            return false;
+            return speed;
         }
+        return arrOfSpeeds;
     }
 
     public static void main(String[] args) {
-        int speed = 1;
+        int[] speed = {3, 0, 2};
 
-        if (isOut(speed)){
-            System.out.println("Игрок со скоростью " + speed + " выбывает из игры.");
-        } else {
-            System.out.println("Игрок со скоростью " + speed + " остается в игре.");
-        }
+        System.out.println("Количество выбывших игроков : " + numberOfLosers(speed));
+        System.out.println("Массив скоростей выбывших игроков : " + Arrays.toString(speedsOfLosers(speed)));
+        System.out.println("Массив скоростей выигравших игроков : " + Arrays.toString(speedsOfWinners(speed)));
     }
 }
 
